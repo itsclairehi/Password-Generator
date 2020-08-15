@@ -8,7 +8,7 @@
 // make function passwordStorage to randomize using input from questions (make all input into an object? userAnswers?)
 // **have to define arrays of lowercase and uppercase alphabet
 // *loop randomizer for every character xhow many they chose
-
+// debugger;
 
 var specialCharacters = [
   '@',
@@ -104,122 +104,119 @@ var upperCasedCharacters = [
 
 
 
-
-
-
-
-
-
 function generatePassword() {
 
 
   //GENERATE PASSWORD OPTIONS
   var characterCount = parseInt(prompt("how many characters? pick between 8 and 128"));
-  
-//checks to see if its NOT a number (isNaN)
-  if(isNaN(characterCount) === true){
-    alert("Password length must be a number")
-  };
+  console.log(characterCount);
 
-  if ( characterCount < 8){
-    alert ('must be at least 8 ')
-  }
+  //checks to see if its NOT a number (isNaN)
 
-  if ( characterCount > 128){
-    alert ('must be less then 129 ')
-  }
-
-  var lowercase = confirm("do you want lowercase?");
-  var uppercase = confirm("do you want uppercase?");
-  var numbers = confirm("do you want numbers?");
-  var special = confirm("do you want special characters?");
-
-  if( 
-    lowercase === false &&
-    uppercase == false &&
-    numbers === false &&
-    special === false
-    ){
-    alert("must select at least one character type");
+  if (isNaN(characterCount) === true) {
+    alert("Password length must be a number");
     return;
   };
 
+  if (characterCount < 8) {
+    alert('must be at least 8 ');
+    return;
+  }
 
-  //create an OBJ to store the users inputs
-   var usersOptions = {
-     length: characterCount,
-     lowerCase: lowercase,
-     upperCase: uppercase,
-     integers: numbers,
-     specialChar: special
+  if (characterCount > 128) {
+    alert('must be less than 129 ');
+    return;
 
-   }
+  }
 
-// return usersOptions;
+  else {
 
-
-
-//GENERATE PASSWORD
-
-//store password as its being built
-var result = [];
-
-//store types of characters to include in oassword
-var possiChar = [];
-
-//contain one of each type chosen character
-var absoluteChar = [];
+    var lowercase = confirm("do you want lowercase?");
+    var uppercase = confirm("do you want uppercase?");
+    var numbers = confirm("do you want numbers?");
+    var special = confirm("do you want special characters?");
 
 
-//condtion to check users options type
-if(usersOptions.specialChar){
-  //combines possiChar arr with specialCharacters arr and saved new array in possiChar
-  possiChar = possiChar.concat(specialCharacters);
-  console.log('CONCAT', possiChar);
+    if (
+      lowercase === false &&
+      uppercase == false &&
+      numbers === false &&
+      special === false
+    ) {
+      alert("must select at least one character type");
+      return;
+    };
 
-  
+
+    //create an OBJ to store the users inputs
+    var usersOptions = {
+      length: characterCount,
+      lowerCase: lowercase,
+      upperCase: uppercase,
+      integers: numbers,
+      specialChar: special
+    }
+
+    console.log(usersOptions);
+
+  }
+
+  //GENERATE PASSWORD
+
+  //store password as its being built
+  var result = [];
+
+  //store types of characters to include in password
+  var possiChar = [];
+
+  //contain one of each type chosen character
+  // var absoluteChar = [];
+
+
+  //condtion to check users options type
+  if (usersOptions.specialChar) {
+    //combines possiChar arr with specialCharacters arr and saved new array in possiChar
+    possiChar = possiChar.concat(specialCharacters);
+    console.log('CONCAT', possiChar);
+  }
+
+  if (usersOptions.integers) {
+    //combines possiChar arr with specialCharacters arr and saved new array in possiChar
+    possiChar = possiChar.concat(numericCharacters);
+    console.log('CONCAT', possiChar);
+  }
+
+  if (usersOptions.lowerCase) {
+    //combines possiChar arr with specialCharacters arr and saved new array in possiChar
+    possiChar = possiChar.concat(lowerCasedCharacters);
+    console.log('CONCAT', possiChar);
+  }
+
+  if (usersOptions.upperCase) {
+    //combines possiChar arr with specialCharacters arr and saved new array in possiChar
+    possiChar = possiChar.concat(upperCasedCharacters);
+    console.log('CONCAT', possiChar);
+  }
+
+  //iterate thru chosen arrays for password length, push into empty possiChar array, then randomiz order
+  for (let i = 0; i < usersOptions.length; i++) {
+    result.push(random(possiChar))
+
+  }
+// send final password to become 'password' variable
+  return result.join('');
 }
 
-if(usersOptions.integers){
-  //combines possiChar arr with specialCharacters arr and saved new array in possiChar
-  possiChar = possiChar.concat(numericCharacters);
-  console.log('CONCAT', possiChar);
 
-  
-}
-
-if(usersOptions.lowerCase){
-  //combines possiChar arr with specialCharacters arr and saved new array in possiChar
-  possiChar = possiChar.concat(lowerCasedCharacters);
-  console.log('CONCAT', possiChar);
-
-  
-}
-
-if(usersOptions.upperCase){
-  //combines possiChar arr with specialCharacters arr and saved new array in possiChar
-  possiChar = possiChar.concat(upperCasedCharacters);
-  console.log('CONCAT', possiChar);
-
-  
-}
-
-//console.log('YOO', absoluteChar);
-
-for (let i = 0; i < usersOptions.length; i++) {
-  result.push(random(possiChar))
-  
-}
-   return result.join('');
-}
-
-function random(arr){
+//randomize the characters in a given array
+function random(arr) {
   var index = Math.floor(Math.random() * arr.length);
-  console.log('RNADOM NUMBER', index)
+  console.log('RANDOM NUMBER', index)
   var element = arr[index];
   console.log('RANDOM Char', element)
   return element;
 }
+
 
 
 
@@ -241,27 +238,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
-
-
-
-
-
-
-
-
-function idk(){
-  var color ='blue';
-  car(color)
-}
-function bear(){
-  car(4)
-}
-
-
-function car (ballon){
-  console.log(ballon)
-}
