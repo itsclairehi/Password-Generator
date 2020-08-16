@@ -169,10 +169,7 @@ function generatePassword() {
   //store types of characters to include in password
   var possiChar = [];
 
-  //contain one of each type chosen character
-  // var absoluteChar = [];
-
-
+  
   //condtion to check users options type
   if (usersOptions.specialChar) {
     //combines possiChar arr with specialCharacters arr and saved new array in possiChar
@@ -216,7 +213,6 @@ function random(arr) {
   console.log('RANDOM Char', element)
   return element;
 }
-
 
 
 
